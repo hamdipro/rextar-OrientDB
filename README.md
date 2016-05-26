@@ -1,6 +1,6 @@
-# Gremlin-node-orientdb
+# rexter-OrientDB
 
-Gremlin-node-orientdb is a javascript wrapper around the Gremlin API using Rexster.
+rexter-OrientDB is a javascript wrapper around the Gremlin API using Rexster.
 
 ## Rexster
 
@@ -10,7 +10,7 @@ A graph database hosted in the OrientDB can be configured in Rexster and then ac
 
 #### Installation
 
-You can get the latest stable release of Rexster from its Download Page. The latest stable release when this page was last updated was 2.5.0.
+You can get the latest stable release of Rexster from its Download Page. The latest stable release when this page was last updated was 2.6.0.
 
 Or you can build a snapshot by executing the following Git and Maven commands:
 
@@ -61,8 +61,8 @@ $ ./rexster.sh -s -c ../config/rexster.xml
 ## Installation
 
 ```bash
-$ git clone git@github.com:atefzed/gremlin-node-orientdb.git
-$ cd gremlin-node-orientdb && npm install
+$ git clone git@github.com:hamdipro/rextar-OrientDB.git
+$ cd rextar-OrientDB && npm install
 ```
 
 To run your app, you need to run these step by step :
@@ -73,88 +73,35 @@ To run your app, you need to run these step by step :
 
 ## Examples
 
-#### Using sails-orientdb
+#### Exaple
 
 ```javascript
-var orientAdapter = require('sails-orientdb');
+var config = {
+    host: 'localhost',
+    port: 8182,
+    graph: 'orientgraph'
+};
+var Graph = require("./lib/graphrexter.js")(config);
 
-require('{{ PATH TO GRAPH.JS }}')(orientAdapter);
+Graph.operations.V(function(err,data){
+	if(err) console.log("Error Accured");
+	console.log("Vertexes Data ",data);
+})
+Graph.operations.E(function(err,data){
+	if(err) console.log("Error Accured");
+	console.log("Edges Data ",data);
+})
 
-module.exports = {
-  	// Setup Adapters
-  	// Creates named adapters that have have been required
-	adapters: {
-	   'default': orientAdapter,
-	   orient: orientAdapter,
-	},
-
-	// Build Connections Config
-	// Setup connections using the named adapter configs
-	connections: {
-	   myLocalOrient: {
-		   adapter: 'orient',
-		   host: 'localhost',
-		   port: {{ PORT }},
-		   user: '{{ USERNAME }}',
-		   password: '{{ PASSWORD }}',
-		   database: "{{ DATABASE'S NAME }}"
-	   }
-	},
-
-	defaults: {
-	   migrate: 'safe'
-	}
-}
+Graph.operations.inV("#9:2",function(err,data){
+	if(err) console.log("Error Accured");
+	console.log("INV Data ",data);
+})
+Graph.operations.outV("#9:1",function(err,data){
+	if(err) console.log("Error Accured");
+	console.log("OUT Data ",data);
+})
 ```
 
-Simple request :
-
-```javascript
-  var o = app.models.{{ COLLECTION NAME }};
-  o.inV('id', '#12:0', function(err, resp) {
-    if (err) throw err;
-    console.log(resp);
-  });
-```
-
-Nested request :
-
-```javascript
-  var o = app.models.{{ COLLECTION NAME }};
-  o.inV('id', '#12:0', function(error, resp) {
-    if (error) throw error;
-    o.dedup(resp, function(e, r){
-      if (e) throw e;
-      o.count(r, function(err, c){
-        if (err) throw err;
-        console.log(c);
-      });
-    });
-  });
-```
-
-
-#### Without sails-orientdb
-
-```javascript
-var Graph = require('{{ PATH TO GRAPH.JS }}');
-var g = new Graph();
-g.filter('', '{{ COLLECTION NAME }}', {
-  'lastname': 'test',
-  'familySituation': 'single'
-}, function(err, res) {
-    if (err) throw err;
-    console.log(res);
-});
-```
-
-## Tests
-
-All tests are written with [mocha](http://visionmedia.github.com/mocha/) and should be run with [npm](http://npmjs.org):
-
-``` bash
-  $ npm test
-```
 
 ## Contributing
 
