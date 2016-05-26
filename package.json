@@ -1,0 +1,38 @@
+{
+  "name": "rextar-OrientDB",
+  "version": "1.0.0",
+  "description": "rextar-OrientDB is a javascript Library around the Gremlin API using Rexster.",
+  "main": "./lib/graph.js",
+  "directories": {
+    "example": "example",
+    "lib": "lib"
+  },
+  "scripts": {
+   
+  },
+  "keywords": [
+    "orientdb",
+    "gremlin",
+    "graph",
+    "graphdb",
+    "rexster",
+    "extension"
+  ],
+  "author": [
+    {
+      "name": "Bouchlema Sabri",
+      "email": "bouchlemasabri@gmail.com"
+    },
+    {
+      "name": "Hamdi Hmidi",
+      "email": "hmidihamdi7@gmail.com"
+    }
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "async": "^1.2.1",
+    "faker": "^2.1.5",
+    "grex": "^0.8.0",
+    "lodash": "^3.9.3"
+  }
+}
